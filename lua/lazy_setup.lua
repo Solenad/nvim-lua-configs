@@ -1,19 +1,19 @@
 require("lazy").setup({
   {
     "AstroNvim/AstroNvim",
-    version = "^4", -- Remove version tracking to elect for nightly AstroNvim
+    version = "^4",                -- Remove version tracking to elect for nightly AstroNvim
     import = "astronvim.plugins",
-    opts = { -- AstroNvim options must be set here with the `import` key
-      mapleader = " ", -- This ensures the leader key must be configured before Lazy is set up
-      maplocalleader = ",", -- This ensures the localleader key must be configured before Lazy is set up
-      icons_enabled = true, -- Set to false to disable icons (if no Nerd Font is available)
-      pin_plugins = nil, -- Default will pin plugins when tracking `version` of AstroNvim, set to true/false to override
+    opts = {                       -- AstroNvim options must be set here with the `import` key
+      mapleader = " ",             -- This ensures the leader key must be configured before Lazy is set up
+      maplocalleader = ",",        -- This ensures the localleader key must be configured before Lazy is set up
+      icons_enabled = true,        -- Set to false to disable icons (if no Nerd Font is available)
+      pin_plugins = nil,           -- Default will pin plugins when tracking `version` of AstroNvim, set to true/false to override
       update_notifications = true, -- Enable/disable notification about running `:Lazy update` twice to update pinned plugins
     },
   },
   { import = "community" },
-  { "kyazdani42/nvim-tree.lua", event = "VimEnter", dependencies = "nvim-tree/nvim-web-devicons" },
-  { "catppuccin/nvim", name = "catppuccin", lazy = false, priority = 1001 },
+  { "kyazdani42/nvim-tree.lua", event = "VimEnter",  dependencies = "nvim-tree/nvim-web-devicons" },
+  { "catppuccin/nvim",          name = "catppuccin", lazy = false,                                priority = 1001 },
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -38,7 +38,7 @@ require("lazy").setup({
     keys = {
       { "<leader>gg", "<cmd>LazyGit<cr>", desc = "Open LazyGit" }
     },
-    cmd = {  -- Optional: lazy-load only when these commands are used
+    cmd = { -- Optional: lazy-load only when these commands are used
       "LazyGit",
       "LazyGitConfig",
       "LazyGitCurrentFile",
@@ -49,7 +49,7 @@ require("lazy").setup({
   {
     "lewis6991/satellite.nvim",
     config = function()
-    require('satellite').setup()
+      require('satellite').setup()
     end
   },
   {
@@ -65,16 +65,16 @@ require("lazy").setup({
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v2.x',
     dependencies = {
-        -- LSP Support
-        {'neovim/nvim-lspconfig'},             -- Required
-        {'williamboman/mason.nvim'},           -- Optional
-        {'williamboman/mason-lspconfig.nvim'}, -- Optional
+      -- LSP Support
+      { 'neovim/nvim-lspconfig' },             -- Required
+      { 'williamboman/mason.nvim' },           -- Optional
+      { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
-        -- Autocompletion
-        {'hrsh7th/nvim-cmp'},     -- Required
-        {'hrsh7th/cmp-nvim-lsp'}, -- Required
-        {'L3MON4D3/LuaSnip'},     -- Required
-      }
+      -- Autocompletion
+      { 'hrsh7th/nvim-cmp' },     -- Required
+      { 'hrsh7th/cmp-nvim-lsp' }, -- Required
+      { 'L3MON4D3/LuaSnip' },     -- Required
+    }
   },
   {
     "olimorris/codecompanion.nvim",
@@ -86,6 +86,14 @@ require("lazy").setup({
     },
     config = true
   },
+  {
+    "lervag/vimtex",
+    lazy = false,
+    init = function()
+      vim.g.vimtex_view_method = "sioyek"
+    end,
+  },
+
   { import = "plugins" },
 } --[[@as LazySpec]], {
   -- Configure any other `lazy.nvim` configuration options here
