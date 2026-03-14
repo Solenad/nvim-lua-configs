@@ -90,7 +90,38 @@ require("lazy").setup({
     "lervag/vimtex",
     lazy = false,
     init = function()
-      vim.g.vimtex_view_method = "sioyek"
+      vim.g.vimtex_view_method = 'general'
+      vim.g.vimtex_view_general_viewer = 'start'
+      vim.g.vimtex_view_general_options = ''
+      vim.g.maplocalleader = ','
+    end,
+  },
+  {
+    "SUSTech-data/neopyter",
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+      'AbaoFromCUG/websocket.nvim',
+    },
+    -- Use 'config' instead of 'opts' to explicitly call the setup function
+    config = function()
+      require("neopyter").setup({
+        mode = "direct",
+        remote_address = "127.0.0.1:9001",
+        file_pattern = { "*.ju.*" },
+        on_attach = function(bufnr)
+          local function map(mode, lhs, rhs, desc)
+            vim.keymap.set(mode, lhs, rhs, { desc = desc, buffer = bufnr })
+          end
+
+          -- Useful keymaps from the documentation
+          map("n", "<C-Enter>", "<cmd>Neopyter execute notebook:run-cell<cr>", "run selected")
+          map("n", "<space>X", "<cmd>Neopyter execute notebook:run-all-above<cr>", "run all above cell")
+          map("n", "<space>nt", "<cmd>Neopyter execute kernelmenu:restart<cr>", "restart kernel")
+          map("n", "<S-Enter>", "<cmd>Neopyter execute notebook:run-cell-and-select-next<cr>",
+            "run selected and select next")
+        end,
+      })
     end,
   },
 
