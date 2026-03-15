@@ -26,6 +26,7 @@ return {
       end
 
       return {
+        model = "gpt-5.1",
         debug = false,
         auto_insert_mode = true,
         show_help = false,

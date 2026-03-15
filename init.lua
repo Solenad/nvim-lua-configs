@@ -26,6 +26,7 @@ vim.cmd("set shiftwidth=2")
 
 
 require "lazy_setup"
+
 require "polish"
 require "plugins-config.nvim-tree"
 require("catppuccin").setup({
@@ -75,14 +76,6 @@ require("catppuccin").setup({
   },
 })
 
-require("codecompanion").setup({
-  strategies = {
-    chat = {
-      adapter = "openai",
-      api_key = vim.env.OPENAI_API_KEY -- Load key from environment variable
-    },
-  },
-})
 
 require 'nvim-web-devicons'.setup {
   -- your personnal icons can go here (to override)
@@ -139,12 +132,12 @@ require 'nvim-web-devicons'.setup {
   },
 }
 
+
 vim.api.nvim_set_hl(0, "Cursor", { bg = "NONE", fg = "NONE" }) -- Cursor highlight itself
 vim.api.nvim_set_hl(0, "CursorLine", { bg = "NONE" })          -- Cursor line background
 vim.api.nvim_set_hl(0, "CursorColumn", { bg = "NONE" })        -- Cursor column background
 vim.cmd([[set nocursorline]])
 vim.cmd([[set nocursorcolumn]])
-vim.cmd.colorscheme "catppuccin"
 
 local lsp = require('lsp-zero').preset({})
 
@@ -213,6 +206,13 @@ require('satellite').setup {
 }
 
 -- Default options:
+
+
+require('livepreview.config').set()
+
+
+
+
 require('kanagawa').setup({
   compile = false,  -- enable compiling the colorscheme
   undercurl = true, -- enable undercurls
@@ -238,29 +238,97 @@ require('kanagawa').setup({
   },
 })
 
--- setup must be called before loading
-vim.cmd("colorscheme kanagawa")
 
-require('livepreview.config').set()
+require("rose-pine").setup({
+  variant = "auto",      -- auto, main, moon, or dawn
+  dark_variant = "main", -- main, moon, or dawn
+  dim_inactive_windows = false,
+  extend_background_behind_borders = true,
 
-require("lazy").setup({
-
-  {
-    "kdheepak/lazygit.nvim",
-    lazy = true,
-    cmd = {
-      "LazyGit",
-      "LazyGitConfig",
-      "LazyGitCurrentFile",
-      "LazyGitFilter",
-      "LazyGitFilterCurrentFile",
-    },
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    keys = {
-      { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
-    }
+  enable = {
+    terminal = true,
+    legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
+    migrations = true,        -- Handle deprecated options automatically
   },
 
+  styles = {
+    bold = true,
+    italic = true,
+    transparency = false,
+  },
+
+  groups = {
+    border = "muted",
+    link = "iris",
+    panel = "surface",
+
+    error = "love",
+    hint = "iris",
+    info = "foam",
+    note = "pine",
+    todo = "rose",
+    warn = "gold",
+
+    git_add = "foam",
+    git_change = "rose",
+    git_delete = "love",
+    git_dirty = "rose",
+    git_ignore = "muted",
+    git_merge = "iris",
+    git_rename = "pine",
+    git_stage = "iris",
+    git_text = "rose",
+    git_untracked = "subtle",
+
+    h1 = "iris",
+    h2 = "foam",
+    h3 = "rose",
+    h4 = "gold",
+    h5 = "pine",
+    h6 = "foam",
+  },
+
+  palette = {
+    -- Override the builtin palette per variant
+    -- moon = {
+    --     base = '#18191a',
+    --     overlay = '#363738',
+    -- },
+  },
+
+  -- NOTE: Highlight groups are extended (merged) by default. Disable this
+  -- per group via `inherit = false`
+  highlight_groups = {
+    -- Comment = { fg = "foam" },
+    -- StatusLine = { fg = "love", bg = "love", blend = 15 },
+    -- VertSplit = { fg = "muted", bg = "muted" },
+    -- Visual = { fg = "base", bg = "text", inherit = false },
+  },
+
+  before_highlight = function(group, highlight, palette)
+    -- Disable all undercurls
+    -- if highlight.undercurl then
+    --     highlight.undercurl = false
+    -- end
+    --
+    -- Change palette colour
+    -- if highlight.fg == palette.pine then
+    --     highlight.fg = palette.foam
+    -- end
+  end,
 })
+
+-- COLORSCHEMES
+-- setup must be called before loading
+
+-- ROSE-PINE
+vim.cmd("colorscheme rose-pine")
+-- vim.cmd("colorscheme rose-pine-main")
+-- vim.cmd("colorscheme rose-pine-moon")
+-- vim.cmd("colorscheme rose-pine-dawn")
+
+-- KANAGAWA (Dark, Red)
+-- vim.cmd("colorscheme kanagawa")
+
+-- TOKYONIGHT
+-- vim.cmd("colorscheme tokyonight")

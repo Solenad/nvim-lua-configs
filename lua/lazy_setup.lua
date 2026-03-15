@@ -99,11 +99,11 @@ require("lazy").setup({
   {
     "SUSTech-data/neopyter",
     dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-treesitter/nvim-treesitter',
-      'AbaoFromCUG/websocket.nvim',
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "AbaoFromCUG/websocket.nvim",
     },
-    -- Use 'config' instead of 'opts' to explicitly call the setup function
+    cmd = { "Neopyter" }, -- load plugin when any :Neopyter command is used
     config = function()
       require("neopyter").setup({
         mode = "direct",
@@ -114,8 +114,7 @@ require("lazy").setup({
             vim.keymap.set(mode, lhs, rhs, { desc = desc, buffer = bufnr })
           end
 
-          -- Useful keymaps from the documentation
-          map("n", "<C-Enter>", "<cmd>Neopyter execute notebook:run-cell<cr>", "run selected")
+          map("n", "<space>K", "<cmd>Neopyter execute notebook:run-cell<cr>", "run selected")
           map("n", "<space>X", "<cmd>Neopyter execute notebook:run-all-above<cr>", "run all above cell")
           map("n", "<space>nt", "<cmd>Neopyter execute kernelmenu:restart<cr>", "restart kernel")
           map("n", "<S-Enter>", "<cmd>Neopyter execute notebook:run-cell-and-select-next<cr>",
@@ -124,6 +123,13 @@ require("lazy").setup({
       })
     end,
   },
+
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    priority = 1000,
+  },
+
 
   { import = "plugins" },
 } --[[@as LazySpec]], {
