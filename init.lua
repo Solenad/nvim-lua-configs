@@ -343,7 +343,7 @@ require("rose-pine").setup({
 
 -- KANAGAWA (Dark, Red)
 -- vim.cmd("colorscheme kanagawa")
-vim.cmd("colorscheme candyland")
+vim.cmd("colorscheme catppuccin")
 
 -- TOKYONIGHT
 -- vim.cmd("colorscheme tokyonight")
