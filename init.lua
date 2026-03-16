@@ -1,5 +1,8 @@
 -- This file simply bootstraps the installation of Lazy.nvim and then calls other files for execution
 -- This file doesn't necessarily need to be touched, BE CAUTIOUS editing this file and proceed at your own risk.
+vim.env.PATH = "C:/Users/Rohann/AppData/Local/Programs/Python/Python312;" .. vim.env.PATH
+vim.env.PATH = "C:/Users/Rohann/AppData/Local/Programs/Python/Python312/Scripts;" .. vim.env.PATH
+vim.g.python3_host_prog = "C:/Users/Rohann/AppData/Local/Programs/Python/Python312/python.exe"
 local lazypath = vim.env.LAZY or vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not (vim.env.LAZY or (vim.uv or vim.loop).fs_stat(lazypath)) then
   -- stylua: ignore
@@ -25,6 +28,8 @@ vim.cmd("set shiftwidth=2")
 
 
 
+vim.env.PYTHON = "C:/Users/Rohann/AppData/Local/Programs/Python/Python312/python.exe"
+vim.env.PYTHON3 = vim.env.PYTHON
 require "lazy_setup"
 
 require "polish"
@@ -205,6 +210,15 @@ require('satellite').setup {
   },
 }
 
+vim.keymap.set("v", "<leader>mr", "<Esc><Cmd>MoltenEvaluateVisual<CR>", { desc = "Molten eval visual selection" })
+vim.keymap.set("n", "<leader>ml", ":MoltenEvaluateLine<CR>", { desc = "Molten eval line" })
+vim.keymap.set("n", "<leader>mo", ":MoltenShowOutput<CR>", { desc = "Molten show output" })
+vim.keymap.set("n", "<leader>mh", ":MoltenHideOutput<CR>", { desc = "Molten hide output" })
+vim.keymap.set("n", "<leader>md", ":MoltenDelete<CR>", { desc = "Molten delete cell" })
+vim.keymap.set("n", "<leader>mi", ":MoltenInit<CR>", { desc = "Molten init kernel" })
+vim.keymap.set("n", "<leader>mI", ":MoltenDeinit<CR>", { desc = "Molten de-init kernel" })
+vim.keymap.set("n", "<leader>mr", ":MoltenReevaluateCell<CR>", { desc = "Molten re-run cell" })
+
 -- Default options:
 
 
@@ -237,6 +251,7 @@ require('kanagawa').setup({
     light = "lotus"
   },
 })
+
 
 
 require("rose-pine").setup({
@@ -322,13 +337,13 @@ require("rose-pine").setup({
 -- setup must be called before loading
 
 -- ROSE-PINE
-vim.cmd("colorscheme rose-pine")
 -- vim.cmd("colorscheme rose-pine-main")
 -- vim.cmd("colorscheme rose-pine-moon")
 -- vim.cmd("colorscheme rose-pine-dawn")
 
 -- KANAGAWA (Dark, Red)
 -- vim.cmd("colorscheme kanagawa")
+vim.cmd("colorscheme candyland")
 
 -- TOKYONIGHT
 -- vim.cmd("colorscheme tokyonight")

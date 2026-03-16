@@ -12,6 +12,20 @@ require("lazy").setup({
     },
   },
   { import = "community" },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "python",
+        "lua", -- It's good to have lua for your config
+        "vim",
+        "vimdoc",
+        "r",
+        "markdown"
+        -- Add any other languages you use here
+      },
+    },
+  },
   { "kyazdani42/nvim-tree.lua", event = "VimEnter",  dependencies = "nvim-tree/nvim-web-devicons" },
   { "catppuccin/nvim",          name = "catppuccin", lazy = false,                                priority = 1001 },
   {
@@ -96,44 +110,41 @@ require("lazy").setup({
       vim.g.maplocalleader = ','
     end,
   },
-  {
-    "SUSTech-data/neopyter",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "AbaoFromCUG/websocket.nvim",
-    },
-    cmd = { "Neopyter" }, -- load plugin when any :Neopyter command is used
-    config = function()
-      require("neopyter").setup({
-        mode = "direct",
-        remote_address = "127.0.0.1:9001",
-        file_pattern = { "*.ju.*" },
-        on_attach = function(bufnr)
-          local function map(mode, lhs, rhs, desc)
-            vim.keymap.set(mode, lhs, rhs, { desc = desc, buffer = bufnr })
-          end
 
-          map("n", "<space>K", "<cmd>Neopyter execute notebook:run-cell<cr>", "run selected")
-          map("n", "<space>X", "<cmd>Neopyter execute notebook:run-all-above<cr>", "run all above cell")
-          map("n", "<space>nt", "<cmd>Neopyter execute kernelmenu:restart<cr>", "restart kernel")
-          map("n", "<S-Enter>", "<cmd>Neopyter execute notebook:run-cell-and-select-next<cr>",
-            "run selected and select next")
-        end,
-      })
+  {
+    "benlubas/molten-nvim",
+    version = "^1.0.0", -- keep under 2.0.0 for now
+    dependencies = {},
+    build = ":UpdateRemotePlugins",
+    init = function()
+      vim.g.molten_image_provider = "none"
+      vim.g.molten_output_win_max_height = 20
     end,
   },
-
+  -- {
+  --   "3rd/image.nvim",
+  --   opts = {
+  --     backend = "kitty", -- change if needed
+  --     max_width = 100,
+  --     max_height = 12,
+  --     max_height_window_percentage = math.huge,
+  --     max_width_window_percentage = math.huge,
+  --     window_overlap_clear_enabled = true,
+  --     window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+  --   },
+  -- },
   {
     "rose-pine/neovim",
     name = "rose-pine",
     priority = 1000,
   },
+  { 'AmberLehmann/candyland.nvim', priority = 1000, },
 
 
   { import = "plugins" },
 } --[[@as LazySpec]], {
   -- Configure any other `lazy.nvim` configuration options here
+  rocks = { enabled = false },
   install = { colorscheme = { "astrotheme", "habamax" } },
   ui = { backdrop = 100 },
   performance = {

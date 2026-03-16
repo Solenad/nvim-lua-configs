@@ -26,11 +26,12 @@ return {
       end
 
       return {
-        model = "gpt-5.1",
+        model = "gpt-4.1",
         debug = false,
         auto_insert_mode = true,
         show_help = false,
         system_prompt = system_prompt,
+        context = "buffers",
         window = {
           layout = "vertical",
           width = 0.4,
