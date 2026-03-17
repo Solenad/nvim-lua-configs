@@ -26,6 +26,31 @@ require("lazy").setup({
       },
     },
   },
+  {
+    "GCBallesteros/NotebookNavigator.nvim",
+    keys = {
+      { "]h",        function() require("notebook-navigator").move_cell "d" end },
+      { "[h",        function() require("notebook-navigator").move_cell "u" end },
+      { "<leader>X", "<cmd>lua require('notebook-navigator').run_cell()<cr>" },
+      { "<leader>x", "<cmd>lua require('notebook-navigator').run_and_move()<cr>" },
+    },
+    dependencies = {
+      "echasnovski/mini.comment",
+      -- "hkupty/iron.nvim", -- repl provider
+      -- "akinsho/toggleterm.nvim", -- alternative repl provider
+      "benlubas/molten-nvim", -- use molten as provider
+      "anuvyklack/hydra.nvim",
+    },
+    event = "VeryLazy",
+    config = function()
+      local nn = require "notebook-navigator"
+      nn.setup({
+        activate_hydra_keys = "<leader>h",
+        repl_provider = "molten", -- set molten as the backend
+      })
+    end,
+  },
+
   { "kyazdani42/nvim-tree.lua", event = "VimEnter",  dependencies = "nvim-tree/nvim-web-devicons" },
   { "catppuccin/nvim",          name = "catppuccin", lazy = false,                                priority = 1001 },
   {
@@ -59,12 +84,6 @@ require("lazy").setup({
       "LazyGitFilter",
       "LazyGitFilterCurrentFile",
     },
-  },
-  {
-    "lewis6991/satellite.nvim",
-    config = function()
-      require('satellite').setup()
-    end
   },
   {
     "NStefan002/2048.nvim",
@@ -110,6 +129,13 @@ require("lazy").setup({
       vim.g.maplocalleader = ','
     end,
   },
+  {
+    'jmbuhr/otter.nvim',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+    },
+    opts = {},
+  },
 
   {
     "benlubas/molten-nvim",
@@ -117,28 +143,45 @@ require("lazy").setup({
     dependencies = {},
     build = ":UpdateRemotePlugins",
     init = function()
-      vim.g.molten_image_provider = "none"
-      vim.g.molten_output_win_max_height = 20
+      vim.g.molten_image_provider = "image.nvim"
+      vim.g.molten_auto_open_output = true
+      vim.g.molten_wrap_output = true
+      vim.g.molten_virt_text_output = true
     end,
   },
-  -- {
-  --   "3rd/image.nvim",
-  --   opts = {
-  --     backend = "kitty", -- change if needed
-  --     max_width = 100,
-  --     max_height = 12,
-  --     max_height_window_percentage = math.huge,
-  --     max_width_window_percentage = math.huge,
-  --     window_overlap_clear_enabled = true,
-  --     window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
-  --   },
-  -- },
+  {
+    "3rd/image.nvim",
+    opts = {
+      backend = "iterm2", -- change if needed
+      max_width = 100,
+      max_height = 12,
+      max_height_window_percentage = math.huge,
+      max_width_window_percentage = math.huge,
+      window_overlap_clear_enabled = true,
+      window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+    },
+  },
   {
     "rose-pine/neovim",
     name = "rose-pine",
     priority = 1000,
   },
   { 'AmberLehmann/candyland.nvim', priority = 1000, },
+  {
+    'petertriho/nvim-scrollbar',
+    config = function()
+      require('scrollbar').setup({
+        show = true,                 -- Enable the scrollbar
+        show_in_active_only = false, -- Show scrollbar in all windows
+        max_lines = false,           -- Disable max lines limit
+        handlers = {
+          diagnostic = true,         -- Show diagnostics in scrollbar
+          search = true,             -- Show search results in scrollbar
+          gitsigns = true,           -- Show Git changes in scrollbar
+        }
+      })
+    end
+  },
 
 
   { import = "plugins" },

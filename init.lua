@@ -28,6 +28,7 @@ vim.cmd("set shiftwidth=2")
 
 
 
+
 vim.env.PYTHON = "C:/Users/Rohann/AppData/Local/Programs/Python/Python312/python.exe"
 vim.env.PYTHON3 = vim.env.PYTHON
 require "lazy_setup"
@@ -157,59 +158,7 @@ require("notify").setup({
   background_colour = "#1e222a", -- Replace with a valid color if #000000 is not suitable
 })
 
-require('satellite').setup {
-  current_only = false,
-  winblend = 50,
-  zindex = 40,
-  excluded_filetypes = {},
-  width = 2,
-  handlers = {
-    cursor = {
-      enable = true,
-      -- Supports any number of symbols
-      symbols = { '⎺', '⎻', '⎼', '⎽' }
-      -- symbols = { '⎻', '⎼' }
-      -- Highlights:
-      -- - SatelliteCursor (default links to NonText
-    },
-    search = {
-      enable = true,
-      -- Highlights:
-      -- - SatelliteSearch (default links to Search)
-      -- - SatelliteSearchCurrent (default links to SearchCurrent)
-    },
-    diagnostic = {
-      enable = true,
-      signs = { '-', '=', '≡' },
-      min_severity = vim.diagnostic.severity.HINT,
-      -- Highlights:
-      -- - SatelliteDiagnosticError (default links to DiagnosticError)
-      -- - SatelliteDiagnosticWarn (default links to DiagnosticWarn)
-      -- - SatelliteDiagnosticInfo (default links to DiagnosticInfo)
-      -- - SatelliteDiagnosticHint (default links to DiagnosticHint)
-    },
-    gitsigns = {
-      enable = true,
-      signs = { -- can only be a single character (multibyte is okay)
-        add = "│",
-        change = "│",
-        delete = "-",
-      },
-      -- Highlights:
-      -- SatelliteGitSignsAdd (default links to GitSignsAdd)
-      -- SatelliteGitSignsChange (default links to GitSignsChange)
-      -- SatelliteGitSignsDelete (default links to GitSignsDelete)
-    },
-    marks = {
-      enable = true,
-      show_builtins = false, -- shows the builtin marks like [ ] < >
-      key = 'm'
-      -- Highlights:
-      -- SatelliteMark (default links to Normal)
-    },
-  },
-}
-
+vim.g.molten_cell_delimiter = "# %%"
 vim.keymap.set("v", "<leader>mr", "<Esc><Cmd>MoltenEvaluateVisual<CR>", { desc = "Molten eval visual selection" })
 vim.keymap.set("n", "<leader>ml", ":MoltenEvaluateLine<CR>", { desc = "Molten eval line" })
 vim.keymap.set("n", "<leader>mo", ":MoltenShowOutput<CR>", { desc = "Molten show output" })
@@ -218,6 +167,8 @@ vim.keymap.set("n", "<leader>md", ":MoltenDelete<CR>", { desc = "Molten delete c
 vim.keymap.set("n", "<leader>mi", ":MoltenInit<CR>", { desc = "Molten init kernel" })
 vim.keymap.set("n", "<leader>mI", ":MoltenDeinit<CR>", { desc = "Molten de-init kernel" })
 vim.keymap.set("n", "<leader>mr", ":MoltenReevaluateCell<CR>", { desc = "Molten re-run cell" })
+vim.keymap.set("n", "<leader>mD", ":MoltenInterrupt", { desc = "Molten interrupt runtime" })
+vim.keymap.set("n", "<leader>mx", ":MoltenOpenInBrowser<CR>", { desc = "Molten open output in browser", silent = true })
 
 -- Default options:
 
