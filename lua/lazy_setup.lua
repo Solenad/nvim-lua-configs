@@ -31,8 +31,8 @@ require("lazy").setup({
     keys = {
       { "]h",        function() require("notebook-navigator").move_cell "d" end },
       { "[h",        function() require("notebook-navigator").move_cell "u" end },
-      { "<leader>X", "<cmd>lua require('notebook-navigator').run_cell()<cr>",    desc = "Run current cell" },
-      { "<leader>x", "<cmd>lua require('notebook-navigator').run_and_move()<cr>" },
+      { "<leader>L", "<cmd>lua require('notebook-navigator').run_cell()<cr>",     desc = "Run current cell" },
+      { "<leader>X", "<cmd>lua require('notebook-navigator').run_and_move()<cr>", desc = "Run current cell and move" },
     },
     dependencies = {
       "echasnovski/mini.comment",
@@ -48,7 +48,11 @@ require("lazy").setup({
         activate_hydra_keys = "<leader>h",
         repl_provider = "molten", -- set molten as the backend
       })
+      vim.keymap.set("n", "<leader>xa", function()
+        nn.run_all_cells()
+      end, { desc = "Run all cells" })
     end,
+
   },
 
   { "kyazdani42/nvim-tree.lua", event = "VimEnter",  dependencies = "nvim-tree/nvim-web-devicons" },
