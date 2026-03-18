@@ -31,7 +31,7 @@ require("lazy").setup({
     keys = {
       { "]h",        function() require("notebook-navigator").move_cell "d" end },
       { "[h",        function() require("notebook-navigator").move_cell "u" end },
-      { "<leader>X", "<cmd>lua require('notebook-navigator').run_cell()<cr>" },
+      { "<leader>X", "<cmd>lua require('notebook-navigator').run_cell()<cr>",    desc = "Run current cell" },
       { "<leader>x", "<cmd>lua require('notebook-navigator').run_and_move()<cr>" },
     },
     dependencies = {
@@ -143,24 +143,25 @@ require("lazy").setup({
     dependencies = {},
     build = ":UpdateRemotePlugins",
     init = function()
-      vim.g.molten_image_provider = "image.nvim"
+      vim.g.molten_image_provider = "general"
       vim.g.molten_auto_open_output = true
       vim.g.molten_wrap_output = true
       vim.g.molten_virt_text_output = true
     end,
   },
-  {
-    "3rd/image.nvim",
-    opts = {
-      backend = "iterm2", -- change if needed
-      max_width = 100,
-      max_height = 12,
-      max_height_window_percentage = math.huge,
-      max_width_window_percentage = math.huge,
-      window_overlap_clear_enabled = true,
-      window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
-    },
-  },
+  -- {
+  --   "3rd/image.nvim",
+  --   dependencies = { "vhyrro/luarocks.nvim" },
+  --   opts = {
+  --     backend = "kitty", -- change if needed
+  --     max_width = 100,
+  --     max_height = 12,
+  --     max_height_window_percentage = math.huge,
+  --     max_width_window_percentage = math.huge,
+  --     window_overlap_clear_enabled = true,
+  --     window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+  --   },
+  -- },
   {
     "rose-pine/neovim",
     name = "rose-pine",
