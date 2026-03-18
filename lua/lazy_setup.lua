@@ -113,16 +113,16 @@ require("lazy").setup({
       { 'L3MON4D3/LuaSnip' },     -- Required
     }
   },
-  {
-    "olimorris/codecompanion.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      -- The following are optional:
-      { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } },
-    },
-    config = true
-  },
+  -- {
+  --   "olimorris/codecompanion.nvim",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-treesitter/nvim-treesitter",
+  --     -- The following are optional:
+  --     { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } },
+  --   },
+  --   config = true
+  -- },
   {
     "lervag/vimtex",
     lazy = false,
