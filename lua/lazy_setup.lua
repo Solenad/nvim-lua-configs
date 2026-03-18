@@ -29,10 +29,11 @@ require("lazy").setup({
   {
     "GCBallesteros/NotebookNavigator.nvim",
     keys = {
-      { "]h",        function() require("notebook-navigator").move_cell "d" end },
-      { "[h",        function() require("notebook-navigator").move_cell "u" end },
-      { "<leader>L", "<cmd>lua require('notebook-navigator').run_cell()<cr>",     desc = "Run current cell" },
-      { "<leader>X", "<cmd>lua require('notebook-navigator').run_and_move()<cr>", desc = "Run current cell and move" },
+      { "]h",         function() require("notebook-navigator").move_cell "d" end },
+      { "[h",         function() require("notebook-navigator").move_cell "u" end },
+      { "<leader>mA", "<cmd>lua require('notebook-navigator').run_cell()<cr>",      desc = "Run current cell" },
+      { "<leader>ma", "<cmd>lua require('notebook-navigator').run_and_move()<cr>",  desc = "Run current cell and move" },
+      { "<leader>mb", "<cmd>lua require('notebook-navigator').run_all_cells()<cr>", desc = "Run all cells" },
     },
     dependencies = {
       "echasnovski/mini.comment",
@@ -48,12 +49,19 @@ require("lazy").setup({
         activate_hydra_keys = "<leader>h",
         repl_provider = "molten", -- set molten as the backend
       })
-      vim.keymap.set("n", "<leader>xa", function()
-        nn.run_all_cells()
-      end, { desc = "Run all cells" })
     end,
 
   },
+  -- {
+  --   "GCBallesteros/jupytext.nvim",
+  --   config = true,
+  --   -- Depending on your nvim distro or config you may need to make the loading not lazy
+  --   -- lazy=false,
+  --   style = "hydrogen",
+  --   output_extension = "auto", -- Default extension. Don't change unless you know what you are doing
+  --   force_ft = nil,          -- Default filetype. Don't change unless you know what you are doing
+  --   custom_language_formatting = {},
+  -- },
 
   { "kyazdani42/nvim-tree.lua", event = "VimEnter",  dependencies = "nvim-tree/nvim-web-devicons" },
   { "catppuccin/nvim",          name = "catppuccin", lazy = false,                                priority = 1001 },
@@ -127,7 +135,7 @@ require("lazy").setup({
     "lervag/vimtex",
     lazy = false,
     init = function()
-      vim.g.vimtex_view_method = 'general'
+      vim.g.vimtex_view_method = 'none'
       vim.g.vimtex_view_general_viewer = 'start'
       vim.g.vimtex_view_general_options = ''
       vim.g.maplocalleader = ','
