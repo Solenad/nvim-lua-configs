@@ -26,32 +26,32 @@ require("lazy").setup({
       },
     },
   },
-  {
-    "GCBallesteros/NotebookNavigator.nvim",
-    keys = {
-      { "]h",         function() require("notebook-navigator").move_cell "d" end },
-      { "[h",         function() require("notebook-navigator").move_cell "u" end },
-      { "<leader>mA", "<cmd>lua require('notebook-navigator').run_cell()<cr>",      desc = "Run current cell" },
-      { "<leader>ma", "<cmd>lua require('notebook-navigator').run_and_move()<cr>",  desc = "Run current cell and move" },
-      { "<leader>mb", "<cmd>lua require('notebook-navigator').run_all_cells()<cr>", desc = "Run all cells" },
-    },
-    dependencies = {
-      "echasnovski/mini.comment",
-      -- "hkupty/iron.nvim", -- repl provider
-      -- "akinsho/toggleterm.nvim", -- alternative repl provider
-      "benlubas/molten-nvim", -- use molten as provider
-      "anuvyklack/hydra.nvim",
-    },
-    event = "VeryLazy",
-    config = function()
-      local nn = require "notebook-navigator"
-      nn.setup({
-        activate_hydra_keys = "<leader>h",
-        repl_provider = "molten", -- set molten as the backend
-      })
-    end,
-
-  },
+  -- {
+  --   "GCBallesteros/NotebookNavigator.nvim",
+  --   keys = {
+  --     { "]h",         function() require("notebook-navigator").move_cell "d" end },
+  --     { "[h",         function() require("notebook-navigator").move_cell "u" end },
+  --     { "<leader>mA", "<cmd>lua require('notebook-navigator').run_cell()<cr>",      desc = "Run current cell" },
+  --     { "<leader>ma", "<cmd>lua require('notebook-navigator').run_and_move()<cr>",  desc = "Run current cell and move" },
+  --     { "<leader>mb", "<cmd>lua require('notebook-navigator').run_all_cells()<cr>", desc = "Run all cells" },
+  --   },
+  --   dependencies = {
+  --     "echasnovski/mini.comment",
+  --     -- "hkupty/iron.nvim", -- repl provider
+  --     -- "akinsho/toggleterm.nvim", -- alternative repl provider
+  --     "benlubas/molten-nvim", -- use molten as provider
+  --     "smoka7/hydra.nvim",
+  --   },
+  --   event = "VeryLazy",
+  --   config = function()
+  --     local nn = require "notebook-navigator"
+  --     nn.setup({
+  --       activate_hydra_keys = "<leader>h",
+  --       repl_provider = "molten", -- set molten as the backend
+  --     })
+  --   end,
+  --
+  -- },
   -- {
   --   "GCBallesteros/jupytext.nvim",
   --   config = true,
@@ -195,75 +195,16 @@ require("lazy").setup({
       })
     end
   },
+  -- 2. Move markdown-preview OUTSIDE the opencode table
   {
-    "nickjvandyke/opencode.nvim",
-    version = "*", -- Latest stable release
-    dependencies = {
-      {
-        -- `snacks.nvim` integration is recommended, but optional
-        ---@module "snacks" <- Loads `snacks.nvim` types for configuration intellisense
-        "folke/snacks.nvim",
-        optional = true,
-        opts = {
-          input = {}, -- Enhances `ask()`
-          picker = {  -- Enhances `select()`
-            actions = {
-              opencode_send = function(...) return require("opencode").snacks_picker_send(...) end,
-            },
-            win = {
-              input = {
-                keys = {
-                  ["<a-a>"] = { "opencode_send", mode = { "n", "i" } },
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-    -- install with yarn or npm
-    {
-      "iamcco/markdown-preview.nvim",
-      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-      build = "cd app && yarn install",
-      init = function()
-        vim.g.mkdp_filetypes = { "markdown" }
-      end,
-      ft = { "markdown" },
-    },
-
-    config = function()
-      ---@type opencode.Opts
-      vim.g.opencode_opts = {
-        -- Your configuration, if any; goto definition on the type or field for details
-      }
-
-      vim.o.autoread = true -- Required for `opts.events.reload`
-
-      -- Recommended/example keymaps
-      vim.keymap.set({ "n", "x" }, "<C-a>", function() require("opencode").ask("@this: ", { submit = true }) end,
-        { desc = "Ask opencode…" })
-      vim.keymap.set({ "n", "x" }, "<C-x>", function() require("opencode").select() end,
-        { desc = "Execute opencode action…" })
-      vim.keymap.set({ "n", "t" }, "<C-.>", function() require("opencode").toggle() end, { desc = "Toggle opencode" })
-
-      vim.keymap.set({ "n", "x" }, "go", function() return require("opencode").operator("@this ") end,
-        { desc = "Add range to opencode", expr = true })
-      vim.keymap.set("n", "goo", function() return require("opencode").operator("@this ") .. "_" end,
-        { desc = "Add line to opencode", expr = true })
-
-      vim.keymap.set("n", "<S-C-u>", function() require("opencode").command("session.half.page.up") end,
-        { desc = "Scroll opencode up" })
-      vim.keymap.set("n", "<S-C-d>", function() require("opencode").command("session.half.page.down") end,
-        { desc = "Scroll opencode down" })
-
-      -- You may want these if you use the opinionated `<C-a>` and `<C-x>` keymaps above — otherwise consider `<leader>o…` (and remove terminal mode from the `toggle` keymap)
-      vim.keymap.set("n", "+", "<C-a>", { desc = "Increment under cursor", noremap = true })
-      vim.keymap.set("n", "-", "<C-x>", { desc = "Decrement under cursor", noremap = true })
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && npm install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
     end,
+    ft = { "markdown" },
   },
-
-
   { import = "plugins" },
 } --[[@as LazySpec]], {
   -- Configure any other `lazy.nvim` configuration options here

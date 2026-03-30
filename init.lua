@@ -298,3 +298,5 @@ vim.cmd("colorscheme catppuccin")
 
 -- TOKYONIGHT
 -- vim.cmd("colorscheme tokyonight")
+--
+-- Default configuration with all available options
