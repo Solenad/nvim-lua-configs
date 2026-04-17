@@ -3,6 +3,21 @@
 vim.env.PATH = "C:/Users/Rohann/AppData/Local/Programs/Python/Python312;" .. vim.env.PATH
 vim.env.PATH = "C:/Users/Rohann/AppData/Local/Programs/Python/Python312/Scripts;" .. vim.env.PATH
 vim.g.python3_host_prog = "C:/Users/Rohann/AppData/Local/Programs/Python/Python312/python.exe"
+-- Fix for Windows PowerShell quoting/crashing issues
+if vim.fn.has("win32") == 1 then
+  -- Use pwsh if available, otherwise fallback to powershell
+  local powershell_exe = vim.fn.executable("pwsh") == 1 and "pwsh" or "powershell"
+
+  vim.opt.shell = powershell_exe
+  vim.opt.shellcmdflag =
+  "-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;$PSDefaultParameterValues['Out-File:Encoding']='UTF8';"
+  vim.opt.shellredir = "2>&1 | Out-File -Encoding UTF8 %s; return $?"
+  vim.opt.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; return $?"
+
+  -- CRITICAL: These MUST be empty strings for PowerShell on Windows
+  vim.opt.shellquote = ""
+  vim.opt.shellxquote = ""
+end
 local lazypath = vim.env.LAZY or vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not (vim.env.LAZY or (vim.uv or vim.loop).fs_stat(lazypath)) then
   -- stylua: ignore

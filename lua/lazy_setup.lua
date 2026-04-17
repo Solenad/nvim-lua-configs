@@ -189,7 +189,7 @@ require("lazy").setup({
         max_lines = false,           -- Disable max lines limit
         handlers = {
           diagnostic = true,         -- Show diagnostics in scrollbar
-          search = true,             -- Show search results in scrollbar
+          search = false,            -- Show search results in scrollbar
           gitsigns = true,           -- Show Git changes in scrollbar
         }
       })
