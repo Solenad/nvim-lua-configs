@@ -42,6 +42,7 @@ vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
 
 
+vim.keymap.set('i', '<C-v>', '<C-r>+', { noremap = true, silent = true })
 
 
 vim.env.PYTHON = "C:/Users/Rohann/AppData/Local/Programs/Python/Python312/python.exe"
@@ -56,7 +57,7 @@ require("catppuccin").setup({
     light = "latte",
     dark = "mocha",
   },
-  transparent_background = false, -- Keep this true
+  transparent_background = true, -- Keep this true
   show_end_of_buffer = false,
   term_colors = false,
   dim_inactive = {
