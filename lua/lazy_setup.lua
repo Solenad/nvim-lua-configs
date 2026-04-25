@@ -205,6 +205,8 @@ require("lazy").setup({
     end,
     ft = { "markdown" },
   },
+
+
   { import = "plugins" },
 } --[[@as LazySpec]], {
   -- Configure any other `lazy.nvim` configuration options here
