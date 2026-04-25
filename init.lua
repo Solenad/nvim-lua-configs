@@ -44,6 +44,14 @@ vim.cmd("set shiftwidth=2")
 
 vim.keymap.set('i', '<C-v>', '<C-r>+', { noremap = true, silent = true })
 
+-- Delete without yanking in normal and visual mode
+vim.keymap.set({ "n", "v" }, "d", '"_d', { noremap = true })
+vim.keymap.set({ "n", "v" }, "D", '"_D', { noremap = true })
+vim.keymap.set({ "n", "v" }, "c", '"_c', { noremap = true })
+vim.keymap.set({ "n", "v" }, "C", '"_C', { noremap = true })
+vim.keymap.set({ "n", "v" }, "x", '"_x', { noremap = true })
+
+
 
 vim.env.PYTHON = "C:/Users/Rohann/AppData/Local/Programs/Python/Python312/python.exe"
 vim.env.PYTHON3 = vim.env.PYTHON
